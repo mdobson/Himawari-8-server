@@ -17,7 +17,7 @@ http.createServer((req, res) => {
       res.writeHead(500);
       res.end(err.message);
     } else {
-      res.writeHead(200, {
+      res.writeHead(200, 'Latest Image of Earth', {
         'content-type': 'image/png'
       });
       res.end(fs.readFileSync(result));
