@@ -4,6 +4,7 @@ var fs = require('fs');
 var r = require('request');
 var df = require('dateformat');
 var gm = require('gm');
+var im = gm.subClass({ imageMagick: true });
 var async = require('async');
 
 
@@ -86,7 +87,7 @@ const requestLatestEarthImage = (cb) => {
         var gmo = null;
         result.forEach((r) => {
           if(!gmo) {
-            gmo = gm(r);
+            gmo = im(r);
           } else {
             gmo.append(r, true);
           }
@@ -119,7 +120,7 @@ const buildDownloadTask = (row, idx) => {
       var gmo = null;
       results.forEach((tp) => {
         if(!gmo) {
-          gmo = gm(tp);
+          gmo = im(tp);
         } else {
           gmo.append(tp);
         }
