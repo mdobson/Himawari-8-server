@@ -23,7 +23,7 @@ http.createServer((req, res) => {
       res.end(fs.readFileSync(result));
     }
   });
-}).listen(8080);
+}).listen(process.env.PORT || 8080);
 
 const getLatestInfo = (url, cb) => {
   r(url, (err, res, body) => {
