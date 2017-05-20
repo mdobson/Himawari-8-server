@@ -9,6 +9,9 @@
     "gm": "^1.23.0",
     "request": "^2.81.0"
   },
+  "engines": {
+    "node": "6.10.2"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
