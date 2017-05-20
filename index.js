@@ -7,6 +7,7 @@ var gm = require('gm');
 var im = gm.subClass({ imageMagick: true });
 var async = require('async');
 
+var currentDate = null;
 
 var infoEndpoint = 'http://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json';
 
@@ -68,6 +69,15 @@ const requestTile = (tileUrl, imagePath, cb) => {
 
 const requestLatestEarthImage = (cb) => {
   getLatestInfo(infoEndpoint, (err, latestDate) => {
+    
+    console.log('Current date: ', currentDate, ' latest date: ', latestDate);
+    if(currentDate && currentDate.toString() == latestDate.toString()) {
+      console.log('cache hit');
+      return cb(null, 'composite.png');
+    }
+
+    currentDate = latestDate;
+
     const baseUrl = buildBaseRequestUrl(latestDate);
     var tileTasks = [];
     for(var x = 0; x < 4; x++) {
